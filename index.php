@@ -1,8 +1,13 @@
-<?php require_once './DbConnection.php';
-
+<?php
+    require_once './DbConnection.php';
+    require_once './ManageUser.php';
     $connection = new DbConnection();
-    $connection->createNewGuest("mirza", "Hinterseher", "mirzao@xx.at");
+    $mu = new ManageUser();
+    //$connection->createNewGuest("mirza", "Hinterseher", "mirzao@xx.at");
 
+//   $firstname =  $_POST["firstname"];
+//   $lastname =  $_POST["lastname"];
+//   $email =  $_POST["email"];
 
 ?>
 <!doctype html>
@@ -26,11 +31,30 @@
     <input type="submit">
 </form>
 
-    <?php $firstname =  $_POST["firstname"]; ?><br>
-    <?php $lastname =  $_POST["lastname"]; ?><br>
-    <?php $email =  $_POST["email"]; ?><br>
 
+    <?php //$connection->createNewGuest($firstname, $lastname, $email) ?>
 
+<?php
+
+    //$mu->displayAllUsers();
+
+?>
+
+<?php
+
+    if(isset($_POST['display'])) {
+        $mu->displayAllUsers();
+    }
+    if(isset($_POST['close'])) {
+    }
+?>
+
+<form method="post">
+<input type="submit" name="display"
+       value="Display"/>
+<input type="submit" name="close"
+       value="Close"/>
+</form>
 
 </body>
 </html>

@@ -22,6 +22,21 @@
             $conn = null;
         }
 
+        public function connectToDB() : PDO
+        {
+            try {
+                $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                echo "DB connected <br>";
+            }
+            catch
+                (PDOException $e) {
+                  echo "Connection failed: " . $e->getMessage();
+                }
+            return $conn;
+        }
+
         public function createNewGuest($firstname, $lastname, $email): void
         {
             try {
@@ -33,11 +48,8 @@
                 $emailExists -> bindParam(':email', $email);
                 $emailExists ->execute();
                 $r = $emailExists->fetch();
-                echo "EmailCount -> $r[0]";
-                var_dump($r);
+                echo "EmailCount -> $r[0] <br>";
                 $conn = null;
-
-
 
                 if ($r[0] > 0){
                     echo "Email vorhanden";
@@ -46,10 +58,10 @@
                     $stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email)
                         VALUES (:firstname, :lastname, :email)");
                     $stmt -> bindParam(':firstname', $firstname);
-                    $stmt -> bindParam(':firstname', $lastname);
+                    $stmt -> bindParam(':lastname', $lastname);
                     $stmt -> bindParam(':email', $email);
                     $stmt -> execute();
-                    echo "User Created";
+                    echo "NEW USER CREATED";
                 }
 
             }
@@ -58,8 +70,6 @@
             }
             $conn = null;
         }
-
-
 
 
     }
