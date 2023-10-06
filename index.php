@@ -1,7 +1,8 @@
 <?php require_once './DbConnection.php';
 
     $connection = new DbConnection();
-    $connection->createNewGuest("mirza", "Hinterseher", "mirzaomerovic@xx.at");
+    $connection->createNewGuest("mirza", "Hinterseher", "mirzao@xx.at");
+
 
 ?>
 <!doctype html>
@@ -14,6 +15,22 @@
     <title>Document</title>
 </head>
 <body>
+
+<form action="index.php" method="post">
+    <label style="padding-right: 10px">Vorname</label>
+    <input type="text" name="firstname"><br>
+    <label>Nachname</label>
+    <input type="text" name="lastname"><br>
+    <label>Email</label>
+    <input type="text" name="email"><br>
+    <input type="submit">
+</form>
+
+    <?php $firstname =  $_POST["firstname"]; ?><br>
+    <?php $lastname =  $_POST["lastname"]; ?><br>
+    <?php $email =  $_POST["email"]; ?><br>
+
+
 
 </body>
 </html>
